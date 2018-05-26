@@ -27,8 +27,12 @@
     <xsl:template match="/">
 
         <xsl:for-each select="//mets:structMap[@TYPE='LOGICAL']/mets:div">
-            title:<xsl:value-of select="@LABEL"/>
-            identifier:<xsl:value-of select="@CONTENTIDS"/>
+            <xsl:if test="@LABEL">
+                title:<xsl:value-of select="@LABEL"/>
+            </xsl:if>
+            <xsl:if test="@CONTENTIDS">
+                identifier:<xsl:value-of select="@CONTENTIDS"/>
+            </xsl:if>
         </xsl:for-each>
 
         <xsl:for-each select="//mets:dmdSec[@ID=$dmdsec_id]/mets:mdWrap/mets:xmlData/mods:mods/mods:recordInfo/mods:recordIdentifier">

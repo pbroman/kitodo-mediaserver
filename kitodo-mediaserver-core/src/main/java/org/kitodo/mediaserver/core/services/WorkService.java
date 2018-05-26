@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
 import org.kitodo.mediaserver.core.db.entities.Work;
 import org.kitodo.mediaserver.core.db.repositories.IdentifierRepository;
 import org.kitodo.mediaserver.core.db.repositories.WorkRepository;
@@ -100,6 +101,7 @@ public class WorkService {
      *
      * @param work the work entity
      */
+    @Transactional
     public void importWork(Work work) {
         identifierRepository.deleteByWork(work);
         workRepository.save(work);

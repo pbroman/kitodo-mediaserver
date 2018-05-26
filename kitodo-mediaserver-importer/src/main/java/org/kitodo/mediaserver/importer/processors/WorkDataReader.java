@@ -66,6 +66,9 @@ public class WorkDataReader implements IDataReader {
         Set<Identifier> identifierSet = new HashSet<>();
         for (String key : workDataMap.keySet()) {
             if (StringUtils.startsWith(key, "identifier")) {
+                if (StringUtils.isEmpty(workDataMap.get(key))) {
+                    continue;
+                }
                 String type = null;
                 String[] qualifier = key.split("\\.", 2);
 
@@ -73,7 +76,7 @@ public class WorkDataReader implements IDataReader {
                     type = qualifier[1];
                 }
 
-                identifierSet.add(new Identifier(workDataMap.get(key), type));
+                identifierSet.add(new Identifier(workDataMap.get(key), type, work));
             }
         }
 
